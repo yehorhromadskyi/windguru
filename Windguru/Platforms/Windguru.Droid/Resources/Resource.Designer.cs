@@ -46,7 +46,10 @@ namespace Windguru.Droid
 		{
 			
 			// aapt resource value: 0x7f040000
-			public const int TheTextView = 2130968576;
+			public const int SearchEditText = 2130968576;
+			
+			// aapt resource value: 0x7f040001
+			public const int SearchResultsListView = 2130968577;
 			
 			static Id()
 			{
