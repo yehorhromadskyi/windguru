@@ -11,7 +11,7 @@ using Windguru.Droid.Adapters;
 
 namespace Windguru.Droid.Activities
 {
-    [Activity(Label = "Windguru.Droid", MainLauncher = true)]
+    [Activity(Label = "Windguru", MainLauncher = true)]
     public class MainActivity : ReactiveActivity<MainViewModel>
     {
         public EditText SearchEditText { get; private set; }
@@ -20,8 +20,6 @@ namespace Windguru.Droid.Activities
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-
-            Locator.CurrentMutable.RegisterConstant<IHttpProvider>(new HttpProvider());
 
             SetContentView(Resource.Layout.Main);
 
@@ -32,7 +30,19 @@ namespace Windguru.Droid.Activities
             this.WireUpControls();
 
             this.Bind(ViewModel, vm => vm.SearchableText, v => v.SearchEditText.Text);
-            //this.Bind(ViewModel, vm => vm.Password, v => v.PasswordEditText.Text);
+
+            var adapter = new ReactiveListAdapter<SpotInfo>(ViewModel.Spots, (spot, viewGroup) =>
+            {
+                var view = LayoutInflater.Inflate(Android.Resource.Layout.SimpleListItem1, null);
+                var textView = view.FindViewById<TextView>(Android.Resource.Id.Text1);
+
+                textView.Text = spot.Name;
+
+                return view;
+            });
+
+            SearchResultsListView.Adapter = adapter;
+
             //this.BindCommand(ViewModel, vm => vm.LoginCommand, v => v.LoginButton);
         }
     }

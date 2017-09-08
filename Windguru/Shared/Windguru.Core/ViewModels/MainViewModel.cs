@@ -20,19 +20,13 @@ namespace Windguru.Core.ViewModels
         string _searchableText;
         public string SearchableText
         {
-            get { return _searchableText; }
-            set { this.RaiseAndSetIfChanged(ref _searchableText, value); }
+            get => _searchableText;
+            set => this.RaiseAndSetIfChanged(ref _searchableText, value);
         }
 
-        ReactiveList<SpotInfo> _spots;
-        public ReactiveList<SpotInfo> Spots
-        {
-            get { return _spots; }
-            set
-            {
-                this.RaiseAndSetIfChanged(ref _spots, value);
-            }
-        }
+        readonly ReactiveList<SpotInfo> _spots = new ReactiveList<SpotInfo>();
+
+        public IReadOnlyReactiveList<SpotInfo> Spots => _spots;
 
         //public ReactiveCommand LoginCommand { get; private set; }
 
@@ -41,11 +35,26 @@ namespace Windguru.Core.ViewModels
             _httpProvider = httpProvider;
             this.WhenAnyValue(vm => vm.SearchableText)
                 .Where(t => !string.IsNullOrEmpty(t))
-                .Throttle(TimeSpan.FromSeconds(2), RxApp.MainThreadScheduler)
+                .Throttle(TimeSpan.FromSeconds(.75), RxApp.MainThreadScheduler)
                 .Subscribe(async text =>
                 {
                     var spotsResponse = await _httpProvider.GetAsync(string.Format(REQUEST, text));
                     var searchResult = JsonConvert.DeserializeObject<SearchSpotsResult>(spotsResponse.Result);
+
+                    if (searchResult.Spots == null)
+                    {
+                        searchResult.Spots = new List<SpotInfo>();
+                    }
+
+                    using (Spots.SuppressChangeNotifications())
+                    {
+                        if (_spots.Any())
+                        {
+                            _spots.Clear();
+                        }
+
+                        _spots.AddRange(searchResult.Spots);
+                    }
                 });
 
             //var canLogin = this.WhenAnyValue(
