@@ -11,7 +11,7 @@ using Windguru.Droid.Adapters;
 
 namespace Windguru.Droid.Activities
 {
-    [Activity(Label = "Windguru", MainLauncher = true)]
+    [Activity(Label = "Windguru", MainLauncher = false)]
     public class MainActivity : ReactiveActivity<MainViewModel>
     {
         public EditText SearchEditText { get; private set; }
