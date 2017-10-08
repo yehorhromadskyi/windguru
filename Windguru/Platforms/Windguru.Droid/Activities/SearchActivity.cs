@@ -1,18 +1,22 @@
-﻿using Android.App;
-using Android.Widget;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+using Android.App;
+using Android.Content;
 using Android.OS;
-using ReactiveUI;
+using Android.Runtime;
+using Android.Views;
+using Android.Widget;
 using Windguru.Core.ViewModels;
-using Splat;
-using Windguru.Core.Services;
-using Windguru.Core.Services.Implementation;
+using ReactiveUI;
 using Windguru.Core.Models.Api;
-using Windguru.Droid.Adapters;
 
 namespace Windguru.Droid.Activities
 {
-    [Activity(Label = "Windguru", MainLauncher = false)]
-    public class MainActivity : ReactiveActivity<MainViewModel>
+    [Activity(Label = "Windguru", MainLauncher = true)]
+    public class SearchActivity : ReactiveActivity<SearchViewModel>
     {
         public EditText SearchEditText { get; private set; }
         public ListView SearchResultsListView { get; private set; }
@@ -21,15 +25,10 @@ namespace Windguru.Droid.Activities
         {
             base.OnCreate(savedInstanceState);
 
-            SetContentView(Resource.Layout.Main);
-
-            var httpProvider = Locator.CurrentMutable.GetService<IHttpProvider>();
-            
-            ViewModel = new MainViewModel(httpProvider);
-
+            SetContentView(Resource.Layout.SearchView);
             this.WireUpControls();
 
-            this.Bind(ViewModel, vm => vm.SearchableText, v => v.SearchEditText.Text);
+            ViewModel = new SearchViewModel();
 
             var adapter = new ReactiveListAdapter<SpotInfo>(ViewModel.Spots, (spot, viewGroup) =>
             {
@@ -43,8 +42,7 @@ namespace Windguru.Droid.Activities
 
             SearchResultsListView.Adapter = adapter;
 
-            //this.BindCommand(ViewModel, vm => vm.LoginCommand, v => v.LoginButton);
+            this.Bind(ViewModel, vm => vm.SearchableText, v => v.SearchEditText.Text);
         }
     }
 }
-

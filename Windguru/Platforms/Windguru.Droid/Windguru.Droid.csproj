@@ -80,7 +80,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Activities\FirstActivity.cs" />
-    <Compile Include="Activities\MainActivity.cs" />
+    <Compile Include="Activities\SearchActivity.cs" />
     <Compile Include="Adapters\SpotsAdapter.cs" />
     <Compile Include="App.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
@@ -99,9 +99,6 @@
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\layout\Main.axml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
     <AndroidResource Include="Resources\values\Strings.xml" />
   </ItemGroup>
   <ItemGroup>

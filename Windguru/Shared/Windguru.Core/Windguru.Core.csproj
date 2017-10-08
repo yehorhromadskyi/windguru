@@ -43,7 +43,6 @@
     <Compile Include="Services\Implementation\HttpProvider.cs" />
     <Compile Include="Models\Http\Response.cs" />
     <Compile Include="ViewModels\FirstViewModel.cs" />
-    <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\SearchViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

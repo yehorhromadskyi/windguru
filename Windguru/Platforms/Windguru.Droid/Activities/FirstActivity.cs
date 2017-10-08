@@ -14,7 +14,7 @@ using ReactiveUI;
 
 namespace Windguru.Droid.Activities
 {
-    [Activity(Label = "FirstActivity", MainLauncher = true)]
+    [Activity(Label = "FirstActivity", MainLauncher = false)]
     public class FirstActivity : ReactiveActivity<FirstViewModel>
     {
         public EditText TextEdit { get; set; }
