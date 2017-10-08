@@ -42,6 +42,8 @@ namespace Windguru.Droid.Activities
 
             SearchResultsListView.Adapter = adapter;
 
+            SearchResultsListView.SetOnScrollListener()
+
             this.Bind(ViewModel, vm => vm.SearchableText, v => v.SearchEditText.Text);
         }
     }
