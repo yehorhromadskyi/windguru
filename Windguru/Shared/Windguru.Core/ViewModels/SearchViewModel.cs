@@ -2,6 +2,7 @@
 using ReactiveUI;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
@@ -15,9 +16,7 @@ namespace Windguru.Core.ViewModels
 {
     public class SearchViewModel : ReactiveObject
     {
-        readonly string REQUEST = "https://www.windguru.cz/int/jsonapi.php?client=android&search={0}&limit=20&page=1&q=search_spots&username=&password=";
-
-        readonly IHttpProvider _httpProvider;
+        readonly IApiProvider _apiProvider;
 
         string _searchableText;
         public string SearchableText
@@ -29,9 +28,11 @@ namespace Windguru.Core.ViewModels
         readonly ReactiveList<SpotInfo> _spots = new ReactiveList<SpotInfo>();
         public IReadOnlyReactiveList<SpotInfo> Spots => _spots;
 
+        public ReactiveCommand<int, IEnumerable<SpotInfo>> LoadMoreSpots { get; }
+
         public SearchViewModel()
         {
-            _httpProvider = new HttpProvider();
+            _apiProvider = new ApiProvider(new HttpProvider());
 
             var searchObservable =
              this.WhenAnyValue(vm => vm.SearchableText)
@@ -40,13 +41,7 @@ namespace Windguru.Core.ViewModels
                  .ObserveOn(RxApp.MainThreadScheduler)
                  .Subscribe(async text =>
                  {
-                     var spotsResponse = await _httpProvider.GetAsync(string.Format(REQUEST, text));
-                     var searchResult = JsonConvert.DeserializeObject<SearchSpotsResult>(spotsResponse.Result);
-
-                     if (searchResult.Spots == null)
-                     {
-                         searchResult.Spots = new List<SpotInfo>();
-                     }
+                     var spots = await _apiProvider.GetSpotsAsync(text);
 
                      using (Spots.SuppressChangeNotifications())
                      {
@@ -55,7 +50,7 @@ namespace Windguru.Core.ViewModels
                              _spots.Clear();
                          }
 
-                         _spots.AddRange(searchResult.Spots);
+                         _spots.AddRange(spots);
                      }
                  });
         }

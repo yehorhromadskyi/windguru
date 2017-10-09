@@ -40,6 +40,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\IApiProvider.cs" />
     <Compile Include="Services\IHttpProvider.cs" />
+    <Compile Include="Services\Implementation\ApiProvider.cs" />
     <Compile Include="Services\Implementation\HttpProvider.cs" />
     <Compile Include="Models\Http\Response.cs" />
     <Compile Include="ViewModels\FirstViewModel.cs" />

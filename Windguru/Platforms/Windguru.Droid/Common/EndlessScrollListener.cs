@@ -13,7 +13,7 @@ using Android.Widget;
 namespace Windguru.Droid.Common
 {
     // https://github.com/codepath/android_guides/wiki/Endless-Scrolling-with-AdapterViews-and-RecyclerView
-    public abstract class LoadMoreScrollListener : Java.Lang.Object, AbsListView.IOnScrollListener
+    public class EndlessScrollListener : Java.Lang.Object, AbsListView.IOnScrollListener
     {
         public void OnScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount)
         {
@@ -22,7 +22,6 @@ namespace Windguru.Droid.Common
 
         public void OnScrollStateChanged(AbsListView view, [GeneratedEnum] ScrollState scrollState)
         {
-            throw new NotImplementedException();
         }
     }
 }

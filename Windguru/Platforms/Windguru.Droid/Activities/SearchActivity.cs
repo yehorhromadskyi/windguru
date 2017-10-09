@@ -12,6 +12,7 @@ using Android.Widget;
 using Windguru.Core.ViewModels;
 using ReactiveUI;
 using Windguru.Core.Models.Api;
+using Windguru.Droid.Common;
 
 namespace Windguru.Droid.Activities
 {
@@ -42,7 +43,7 @@ namespace Windguru.Droid.Activities
 
             SearchResultsListView.Adapter = adapter;
 
-            SearchResultsListView.SetOnScrollListener()
+            //SearchResultsListView.SetOnScrollListener(new EndlessScrollListener());
 
             this.Bind(ViewModel, vm => vm.SearchableText, v => v.SearchEditText.Text);
         }

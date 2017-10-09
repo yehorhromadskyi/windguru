@@ -34,7 +34,7 @@ namespace Windguru.Droid
 
         public override void OnCreate()
         {
-            Locator.CurrentMutable.RegisterConstant<IHttpProvider>(new HttpProvider());
+            //Locator.CurrentMutable.RegisterConstant<IHttpProvider>(new HttpProvider());
 
             base.OnCreate();
         }
