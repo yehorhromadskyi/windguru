@@ -1,7 +1,10 @@
 ﻿using Android.App;
 using Android.Runtime;
-using Newtonsoft.Json;
+using Microsoft.Practices.ServiceLocation;
+using Microsoft.Practices.Unity;
 using System;
+using Windguru.Core.Services;
+using Windguru.Core.Services.Implementation;
 
 namespace Windguru.Droid
 {
@@ -11,19 +14,18 @@ namespace Windguru.Droid
         protected App(IntPtr javaReference, JniHandleOwnership transfer) 
             : base(javaReference, transfer)
         {
-            AppDomain.CurrentDomain.UnhandledException += OnUnhandledException;
-        }
-
-        private void OnUnhandledException(object sender, UnhandledExceptionEventArgs e)
-        {
-            System.Diagnostics.Debug.WriteLine($"***Exception: {JsonConvert.SerializeObject(e.ExceptionObject)}");
         }
 
         public override void OnCreate()
         {
-            //Locator.CurrentMutable.RegisterConstant<IHttpProvider>(new HttpProvider());
-
             base.OnCreate();
+
+            var container = new UnityContainer();
+
+            container.RegisterType<IHttpProvider, HttpProvider>(new ContainerControlledLifetimeManager());
+            container.RegisterType<IApiProvider, ApiProvider>(new ContainerControlledLifetimeManager());
+
+            ServiceLocator.SetLocatorProvider(() => new UnityServiceLocator(container));
         }
     }
 }

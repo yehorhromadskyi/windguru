@@ -9,6 +9,8 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using Microsoft.Practices.ServiceLocation;
+using Windguru.Core.Services;
 
 namespace Windguru.Droid.Activities
 {
@@ -19,7 +21,9 @@ namespace Windguru.Droid.Activities
         {
             base.OnCreate(savedInstanceState);
 
-            // Create your application here
+            SetContentView(Resource.Layout.SearchView);
+
+            var apiProvider = ServiceLocator.Current.GetInstance<IApiProvider>();
         }
     }
 }
