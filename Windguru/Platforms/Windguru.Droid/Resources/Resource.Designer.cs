@@ -26,7 +26,6 @@ namespace Windguru.Droid
 		
 		public static void UpdateIdValues()
 		{
-			global::Splat.Resource.String.library_name = global::Windguru.Droid.Resource.String.library_name;
 		}
 		
 		public partial class Attribute
@@ -45,20 +44,11 @@ namespace Windguru.Droid
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f040002
-			public const int Button = 2130968578;
-			
-			// aapt resource value: 0x7f040003
-			public const int SearchEditText = 2130968579;
-			
-			// aapt resource value: 0x7f040004
-			public const int SearchResultsListView = 2130968580;
-			
 			// aapt resource value: 0x7f040000
-			public const int TextEdit = 2130968576;
+			public const int SearchEditText = 2130968576;
 			
 			// aapt resource value: 0x7f040001
-			public const int TextView = 2130968577;
+			public const int SearchResultsListView = 2130968577;
 			
 			static Id()
 			{
@@ -74,10 +64,7 @@ namespace Windguru.Droid
 		{
 			
 			// aapt resource value: 0x7f020000
-			public const int FirstView = 2130837504;
-			
-			// aapt resource value: 0x7f020001
-			public const int SearchView = 2130837505;
+			public const int SearchView = 2130837504;
 			
 			static Layout()
 			{
@@ -92,11 +79,8 @@ namespace Windguru.Droid
 		public partial class String
 		{
 			
-			// aapt resource value: 0x7f030001
-			public const int app_name = 2130903041;
-			
 			// aapt resource value: 0x7f030000
-			public const int library_name = 2130903040;
+			public const int app_name = 2130903040;
 			
 			static String()
 			{

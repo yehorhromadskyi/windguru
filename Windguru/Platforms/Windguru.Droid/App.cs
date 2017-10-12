@@ -1,20 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
-using Android.OS;
+﻿using Android.App;
 using Android.Runtime;
-using Android.Views;
-using Android.Widget;
-using Windguru.Core.ViewModels;
-using Splat;
-using ReactiveUI;
-using Windguru.Core.Services;
-using Windguru.Core.Services.Implementation;
 using Newtonsoft.Json;
+using System;
 
 namespace Windguru.Droid
 {
