@@ -23,7 +23,7 @@ namespace Windguru.Core.Services.Implementation
         {
             var spotsResponse = await _httpProvider.GetAsync(string.Format(SEARCH_REQUEST, searchQuery, page));
             var searchResult = JsonConvert.DeserializeObject<SearchSpotsResult>(spotsResponse.Result);
-
+            
             return searchResult.Spots ?? new List<SpotInfo>();
         }
     }

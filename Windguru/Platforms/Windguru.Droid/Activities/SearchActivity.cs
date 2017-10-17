@@ -15,15 +15,19 @@ using System.Reactive.Linq;
 using Android.Text;
 using System.Reactive.Disposables;
 using System.Reactive.Concurrency;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Windguru.Droid.Activities
 {
     [Activity(Label = "SearchActivity", MainLauncher = true)]
     public class SearchActivity : Activity
     {
-        readonly CompositeDisposable compositeDisposable = new CompositeDisposable();
+        readonly CompositeDisposable _compositeDisposable = new CompositeDisposable();
 
         IApiProvider _apiProvider;
+
+        ArrayAdapter<string> _spotsAdapter;
 
         public EditText SearchEditText { get; set; }
         public ListView ResultsListView { get; set; }
@@ -39,33 +43,40 @@ namespace Windguru.Droid.Activities
             SearchEditText = FindViewById<EditText>(Resource.Id.SearchEditText);
             ResultsListView = FindViewById<ListView>(Resource.Id.SearchResultsListView);
 
+            _spotsAdapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1);
+            ResultsListView.Adapter = _spotsAdapter;
+
             var textChanged = SearchEditText.Events()
                                             .TextChanged
-                                            .Where(args => args.Text.Any())
-                                            //.Throttle(TimeSpan.FromSeconds(0.75))
+                                            .Where(args => args.Text.ToString().Length > 1)
+                                            .Throttle(TimeSpan.FromSeconds(1))
+                                            .ObserveOn(SynchronizationContext.Current)
                                             .Subscribe(async args =>
                                             {
-                                                System.Diagnostics.Debug.WriteLine("Loading Started");
-                                                var results = await _apiProvider.GetSpotsAsync(args.Text.ToString());
-                                                //var results = new List<string>();
-                                                //for (int i = 0; i < 10; i++)
-                                                //{
-                                                //    results.Add(args.Text.ToString());
-                                                //}
+                                                var text = args.Text.ToString();
+                                                System.Diagnostics.Debug.WriteLine($"(*) Loading  Started for {text}");
 
-                                                ResultsListView.Adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, results.Select(s => s.Name).ToList());
-                                                //ResultsListView.Adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, results);
-                                                System.Diagnostics.Debug.WriteLine("Loading Finished");
+                                                var results = await _apiProvider.GetSpotsAsync(text);
+
+                                                if (_spotsAdapter.Count > 0)
+                                                {
+                                                    _spotsAdapter.Clear();
+                                                }
+
+                                                _spotsAdapter.AddAll(results.Select(s => s.Name).ToList());
+                                                _spotsAdapter.NotifyDataSetChanged();
+
+                                                System.Diagnostics.Debug.WriteLine($"(*) Loading Finished for {text}");
                                             });
 
-            compositeDisposable.Add(textChanged);
+            _compositeDisposable.Add(textChanged);
         }
 
         protected override void OnDestroy()
         {
             base.OnDestroy();
 
-            compositeDisposable.Clear();
+            _compositeDisposable.Clear();
         }
     }
 }
