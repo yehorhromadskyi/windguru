@@ -19,7 +19,7 @@ namespace Windguru.Droid.Common
         int _totalItemCount;
         bool _updateRequired;
 
-        public event EventHandler ScrollAtTheBottom;
+        public event EventHandler ScrolledToBottom;
 
         public void OnScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount)
         {
@@ -51,7 +51,7 @@ namespace Windguru.Droid.Common
             var scrollIsAboutToEnd = firstVisibleItem + visibleItemCount >= (totalItemCount - 4);
             if (scrollIsAboutToEnd && _updateRequired)
             {
-                ScrollAtTheBottom?.Invoke(this, EventArgs.Empty);
+                ScrolledToBottom?.Invoke(this, EventArgs.Empty);
                 _updateRequired = false;
 
                 //System.Diagnostics.Debug.WriteLine("!!!Load More");

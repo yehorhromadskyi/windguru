@@ -53,8 +53,8 @@ namespace Windguru.Droid.Activities
             ResultsListView.SetOnScrollListener(scrollListener);
 
             var loadMore = Observable.FromEventPattern(
-                                         h => scrollListener.ScrollAtTheBottom += h,
-                                         h => scrollListener.ScrollAtTheBottom -= h)
+                                         h => scrollListener.ScrolledToBottom += h,
+                                         h => scrollListener.ScrolledToBottom -= h)
                                      .SelectMany(_ =>
                                      {
                                          System.Diagnostics.Debug.WriteLine($"!!!Loading for {SearchEditText.Text} on page {_page+1}");
