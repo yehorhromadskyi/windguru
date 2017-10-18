@@ -17,6 +17,8 @@ using System.Reactive.Disposables;
 using System.Reactive.Concurrency;
 using System.Threading;
 using System.Threading.Tasks;
+using Windguru.Droid.Common;
+using Windguru.Core.Models.Api;
 
 namespace Windguru.Droid.Activities
 {
@@ -28,6 +30,8 @@ namespace Windguru.Droid.Activities
         IApiProvider _apiProvider;
 
         ArrayAdapter<string> _spotsAdapter;
+
+        int _page = 1;
 
         public EditText SearchEditText { get; set; }
         public ListView ResultsListView { get; set; }
@@ -44,31 +48,52 @@ namespace Windguru.Droid.Activities
             ResultsListView = FindViewById<ListView>(Resource.Id.SearchResultsListView);
 
             _spotsAdapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1);
+            var scrollListener = new ScrollListener();
             ResultsListView.Adapter = _spotsAdapter;
+            ResultsListView.SetOnScrollListener(scrollListener);
+
+            var loadMore = Observable.FromEventPattern(
+                                         h => scrollListener.ScrollAtTheBottom += h,
+                                         h => scrollListener.ScrollAtTheBottom -= h)
+                                     .SelectMany(_ =>
+                                     {
+                                         System.Diagnostics.Debug.WriteLine($"!!!Loading for {SearchEditText.Text} on page {_page+1}");
+                                         return _apiProvider.GetSpotsAsync(SearchEditText.Text, ++_page);
+                                     })
+                                     .ObserveOn(SynchronizationContext.Current)
+                                     .Subscribe(results =>
+                                     {
+                                         _spotsAdapter.AddAll(results.Select(s => s.Name).ToList());
+
+                                         System.Diagnostics.Debug.WriteLine($"!!!There are {_spotsAdapter.Count} items");
+
+                                         _spotsAdapter.NotifyDataSetChanged();
+                                     });
 
             var textChanged = SearchEditText.Events()
                                             .TextChanged
                                             .Where(args => args.Text.ToString().Length > 1)
-                                            .Throttle(TimeSpan.FromSeconds(1))
-                                            .ObserveOn(SynchronizationContext.Current)
-                                            .Subscribe(async args =>
+                                            .Throttle(TimeSpan.FromSeconds(.75))
+                                            .DistinctUntilChanged()
+                                            .SelectMany(args =>
                                             {
-                                                var text = args.Text.ToString();
-                                                System.Diagnostics.Debug.WriteLine($"(*) Loading  Started for {text}");
-
-                                                var results = await _apiProvider.GetSpotsAsync(text);
-
-                                                if (_spotsAdapter.Count > 0)
+                                                _page = 1;
+                                                return _apiProvider.GetSpotsAsync(args.Text.ToString());
+                                            })
+                                            .ObserveOn(SynchronizationContext.Current)
+                                            .Subscribe(results =>
+                                            {
+                                                if (!_spotsAdapter.IsEmpty)
                                                 {
                                                     _spotsAdapter.Clear();
                                                 }
 
                                                 _spotsAdapter.AddAll(results.Select(s => s.Name).ToList());
+                                                
                                                 _spotsAdapter.NotifyDataSetChanged();
-
-                                                System.Diagnostics.Debug.WriteLine($"(*) Loading Finished for {text}");
                                             });
 
+            _compositeDisposable.Add(loadMore);
             _compositeDisposable.Add(textChanged);
         }
 

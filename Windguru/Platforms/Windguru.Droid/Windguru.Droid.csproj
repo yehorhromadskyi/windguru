@@ -82,7 +82,7 @@
     <Compile Include="Activities\SearchActivity.cs" />
     <Compile Include="Adapters\SpotsAdapter.cs" />
     <Compile Include="App.cs" />
-    <Compile Include="Common\EndlessScrollListener.cs" />
+    <Compile Include="Common\ScrollListener.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
