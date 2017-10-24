@@ -57,7 +57,6 @@ namespace Windguru.Droid.Activities
                                          h => scrollListener.ScrolledToBottom -= h)
                                      .SelectMany(_ =>
                                      {
-                                         System.Diagnostics.Debug.WriteLine($"!!!Loading for {SearchEditText.Text} on page {_page+1}");
                                          return _apiProvider.GetSpotsAsync(SearchEditText.Text, ++_page);
                                      })
                                      .ObserveOn(SynchronizationContext.Current)
@@ -65,15 +64,13 @@ namespace Windguru.Droid.Activities
                                      {
                                          _spotsAdapter.AddAll(results.Select(s => s.Name).ToList());
 
-                                         System.Diagnostics.Debug.WriteLine($"!!!There are {_spotsAdapter.Count} items");
-
                                          _spotsAdapter.NotifyDataSetChanged();
                                      });
 
             var textChanged = SearchEditText.Events()
                                             .TextChanged
                                             .Where(args => args.Text.ToString().Length > 1)
-                                            .Throttle(TimeSpan.FromSeconds(.75))
+                                            .Throttle(TimeSpan.FromSeconds(.5))
                                             .DistinctUntilChanged()
                                             .SelectMany(args =>
                                             {
