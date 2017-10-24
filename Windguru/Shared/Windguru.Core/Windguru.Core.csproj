@@ -36,6 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Models\Api\SearchSpotsResult.cs" />
+    <Compile Include="Models\Api\SpotForecast.cs" />
     <Compile Include="Models\Api\SpotInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\IApiProvider.cs" />

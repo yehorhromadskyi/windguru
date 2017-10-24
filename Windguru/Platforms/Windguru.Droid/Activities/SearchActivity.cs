@@ -29,7 +29,7 @@ namespace Windguru.Droid.Activities
 
         IApiProvider _apiProvider;
 
-        ArrayAdapter<string> _spotsAdapter;
+        ArrayAdapter<SpotInfo> _spotsAdapter;
 
         int _page = 1;
 
@@ -47,7 +47,7 @@ namespace Windguru.Droid.Activities
             SearchEditText = FindViewById<EditText>(Resource.Id.SearchEditText);
             ResultsListView = FindViewById<ListView>(Resource.Id.SearchResultsListView);
 
-            _spotsAdapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1);
+            _spotsAdapter = new ArrayAdapter<SpotInfo>(this, Android.Resource.Layout.SimpleListItem1);
             var scrollListener = new ScrollListener();
             ResultsListView.Adapter = _spotsAdapter;
             ResultsListView.SetOnScrollListener(scrollListener);
@@ -62,7 +62,7 @@ namespace Windguru.Droid.Activities
                                      .ObserveOn(SynchronizationContext.Current)
                                      .Subscribe(results =>
                                      {
-                                         _spotsAdapter.AddAll(results.Select(s => s.Name).ToList());
+                                         _spotsAdapter.AddAll(results.ToList());
 
                                          _spotsAdapter.NotifyDataSetChanged();
                                      });
@@ -85,13 +85,25 @@ namespace Windguru.Droid.Activities
                                                     _spotsAdapter.Clear();
                                                 }
 
-                                                _spotsAdapter.AddAll(results.Select(s => s.Name).ToList());
+                                                _spotsAdapter.AddAll(results.ToList());
                                                 
                                                 _spotsAdapter.NotifyDataSetChanged();
                                             });
 
+            var itemClick = ResultsListView.Events()
+                                           .ItemClick
+                                           .Subscribe(args =>
+                                           {
+                                               var spot = _spotsAdapter.GetItem(args.Position);
+                                               var intent = new Intent(this, typeof(SpotForecastActivity));
+                                               intent.PutExtra("spotId", spot.Id);
+
+                                               StartActivity(intent);
+                                           });
+
             _compositeDisposable.Add(loadMore);
             _compositeDisposable.Add(textChanged);
+            _compositeDisposable.Add(itemClick);
         }
 
         protected override void OnDestroy()

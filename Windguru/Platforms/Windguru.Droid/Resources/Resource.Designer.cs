@@ -66,6 +66,9 @@ namespace Windguru.Droid
 			// aapt resource value: 0x7f020000
 			public const int SearchView = 2130837504;
 			
+			// aapt resource value: 0x7f020001
+			public const int SpotForecast = 2130837505;
+			
 			static Layout()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();

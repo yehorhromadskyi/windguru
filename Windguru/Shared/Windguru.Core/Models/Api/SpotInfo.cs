@@ -12,5 +12,7 @@ namespace Windguru.Core.Models.Api
 
         [JsonProperty("country")]
         public string Country { get; set; }
+
+        public override string ToString() => Name;
     }
 }

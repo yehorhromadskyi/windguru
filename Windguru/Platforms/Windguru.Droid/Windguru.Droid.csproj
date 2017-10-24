@@ -80,6 +80,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Activities\SearchActivity.cs" />
+    <Compile Include="Activities\SpotForecastActivity.cs" />
     <Compile Include="Adapters\SpotsAdapter.cs" />
     <Compile Include="App.cs" />
     <Compile Include="Common\ScrollListener.cs" />
@@ -90,6 +91,9 @@
     <None Include="packages.config" />
     <None Include="Properties\AndroidManifest.xml" />
     <AndroidResource Include="Resources\layout\SearchView.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\SpotForecast.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
