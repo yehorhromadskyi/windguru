@@ -36,21 +36,26 @@ namespace Windguru.Core.Models.Api
         [JsonProperty("RH")]
         public long?[] RH { get; set; }
 
-        [JsonProperty("HCDC")]
-        public long?[] HCDC { get; set; }
-
         [JsonProperty("FLHGT")]
         public long?[] FLHGT { get; set; }
 
+        // Precip. (mm/3h)
         [JsonProperty("APCP")]
         public double?[] APCP { get; set; }
 
+        // Wind gusts
         [JsonProperty("GUST")]
         public double?[] GUST { get; set; }
 
+        // Cloud cover high
+        [JsonProperty("HCDC")]
+        public long?[] HCDC { get; set; }
+
+        // Cloud cover mid
         [JsonProperty("MCDC")]
         public long?[] MCDC { get; set; }
 
+        // Cloud cover low
         [JsonProperty("LCDC")]
         public long?[] LCDC { get; set; }
 
@@ -72,11 +77,12 @@ namespace Windguru.Core.Models.Api
         [JsonProperty("WINDDIR")]
         public long?[] WINDDIR { get; set; }
 
-        [JsonProperty("TMPE")]
-        public double?[] TMPE { get; set; }
-
         [JsonProperty("WINDSPD")]
         public double?[] WINDSPD { get; set; }
+
+        // Temperature
+        [JsonProperty("TMPE")]
+        public double?[] TMPE { get; set; }
 
         [JsonProperty("hr_h")]
         public string[] HrH { get; set; }
