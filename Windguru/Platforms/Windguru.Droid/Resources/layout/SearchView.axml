@@ -5,13 +5,13 @@
     android:layout_height="match_parent">
 
   <EditText
-    android:id="@+id/SearchEditText"
+    android:id="@+id/searchEditText"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center_vertical"/>
 
   <ListView
-    android:id="@+id/SearchResultsListView"
+    android:id="@+id/searchResultsListView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"/>
   

@@ -12,17 +12,23 @@ using Android.Widget;
 using Microsoft.Practices.ServiceLocation;
 using Windguru.Core.Services;
 using Windguru.Core.Models.Common;
+using Android.Support.V7.Widget;
+using Windguru.Droid.Adapters;
 
 namespace Windguru.Droid.Activities
 {
     [Activity(Label = "Forecast")]
     public class SpotForecastActivity : Activity
     {
+        public RecyclerView HourlyForecastRecyclerView { get; private set; }
+
         protected override async void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
 
-            SetContentView(Resource.Layout.SpotForecast);
+            SetContentView(Resource.Layout.SpotForecastView);
+
+            HourlyForecastRecyclerView = FindViewById<RecyclerView>(Resource.Id.forecastRecyclerView);
 
             var apiProvider = ServiceLocator.Current.GetInstance<IApiProvider>();
 
@@ -40,9 +46,14 @@ namespace Windguru.Droid.Activities
                     {
                         Precipitation = data.APCP[i],
                         Temperature = data.TMPE[i],
-                        Hour = data.HrH[i]
+                        Hour = data.HrH[i],
+                        WindDirection = data.WINDDIR[i],
+                        WindSpeed = data.WINDSPD[i]
                     });
                 }
+
+                HourlyForecastRecyclerView.SetAdapter(new HourlyForecastsAdapter(report));
+                HourlyForecastRecyclerView.SetLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.Horizontal, false));
             }
         }
     }

@@ -44,8 +44,8 @@ namespace Windguru.Droid.Activities
 
             _apiProvider = ServiceLocator.Current.GetInstance<IApiProvider>();
 
-            SearchEditText = FindViewById<EditText>(Resource.Id.SearchEditText);
-            ResultsListView = FindViewById<ListView>(Resource.Id.SearchResultsListView);
+            SearchEditText = FindViewById<EditText>(Resource.Id.searchEditText);
+            ResultsListView = FindViewById<ListView>(Resource.Id.searchResultsListView);
 
             _spotsAdapter = new ArrayAdapter<SpotInfo>(this, Android.Resource.Layout.SimpleListItem1);
             var scrollListener = new ScrollListener();
