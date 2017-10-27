@@ -14,6 +14,7 @@ using Windguru.Core.Services;
 using Windguru.Core.Models.Common;
 using Android.Support.V7.Widget;
 using Windguru.Droid.Adapters;
+using System.Globalization;
 
 namespace Windguru.Droid.Activities
 {
@@ -40,13 +41,18 @@ namespace Windguru.Droid.Activities
 
                 var report = new List<HourlyForecast>();
 
-                for (var i = 0; i < data.HrD.Length; i++)
+                //if (!DateTime.TryParseExact(data.InitialDate, new string[] { "dd.MM.yyyy", "MM.dd.yyyy" }, CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime initialDate))
+                //{
+                //    initialDate = DateTime.Today;
+                //}
+                for (var i = 0; i < data.DayWeekly.Length; i++)
                 {
                     report.Add(new HourlyForecast
                     {
                         Precipitation = data.APCP[i],
-                        Temperature = data.TMPE[i],
-                        Hour = data.HrH[i],
+                        Temperature = data.Temperature[i],
+                        Day = $"{((DayOfWeek)data.DayWeekly[i])} {data.DayHourly[i]}",
+                        Hour = data.HourHourly[i],
                         WindDirection = data.WINDDIR[i],
                         WindSpeed = data.WINDSPD[i]
                     });

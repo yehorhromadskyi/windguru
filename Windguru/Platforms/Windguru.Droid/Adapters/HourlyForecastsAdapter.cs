@@ -31,6 +31,7 @@ namespace Windguru.Droid.Adapters
         public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
         {
             var viewHolder = holder as HourlyForecastViewHolder;
+            viewHolder.DayTextView.Text = _hourlyForecasts[position].Day;
             viewHolder.HourTextView.Text = _hourlyForecasts[position].Hour;
         }
 

@@ -1,11 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout 
+<LinearLayout 
   xmlns:android="http://schemas.android.com/apk/res/android"
+  android:orientation="vertical"
+  android:layout_marginLeft="8dp"
+  android:layout_marginRight="8dp"
   android:layout_width="100dp"
-  android:layout_height="160dp">
+  android:layout_height="160dp"
+  android:background="#000000">
+  
   <TextView
+    android:id="@+id/dayTextView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/hourTextView"
     android:layout_gravity="center" />
-</FrameLayout>
+
+  <TextView
+    android:id="@+id/hourTextView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center" />
+</LinearLayout>

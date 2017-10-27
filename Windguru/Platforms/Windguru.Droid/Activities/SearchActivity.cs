@@ -104,6 +104,8 @@ namespace Windguru.Droid.Activities
             _compositeDisposable.Add(loadMore);
             _compositeDisposable.Add(textChanged);
             _compositeDisposable.Add(itemClick);
+
+            SearchEditText.Text = "Maui";
         }
 
         protected override void OnDestroy()

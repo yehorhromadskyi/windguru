@@ -19,7 +19,7 @@ namespace Windguru.Core.Models.Api
         public string Sunset { get; set; }
 
         [JsonProperty("utc_offset")]
-        public long UtcOffset { get; set; }
+        public int UtcOffset { get; set; }
 
         [JsonProperty("fcst")]
         public Forecast Forecast { get; set; }
@@ -80,24 +80,20 @@ namespace Windguru.Core.Models.Api
         [JsonProperty("WINDSPD")]
         public double?[] WINDSPD { get; set; }
 
-        // Temperature
         [JsonProperty("TMPE")]
-        public double?[] TMPE { get; set; }
+        public double?[] Temperature { get; set; }
 
         [JsonProperty("hr_h")]
-        public string[] HrH { get; set; }
+        public string[] HourHourly { get; set; }
 
         [JsonProperty("hr_d")]
-        public string[] HrD { get; set; }
+        public string[] DayHourly { get; set; }
 
-        [JsonProperty("initdate")]
-        public string InitDate { get; set; }
+        [JsonProperty("hr_weekday")]
+        public int[] DayWeekly { get; set; }
 
-        [JsonProperty("init_h")]
-        public string InitH { get; set; }
-
-        [JsonProperty("initstamp")]
-        public long? Initstamp { get; set; }
+        [JsonProperty("init_d")]
+        public string InitialDate { get; set; }
 
         [JsonProperty("model_name")]
         public string ModelName { get; set; }
