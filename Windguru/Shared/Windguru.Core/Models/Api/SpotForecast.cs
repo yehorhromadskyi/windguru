@@ -69,7 +69,7 @@ namespace Windguru.Core.Models.Api
         public string[] SMERN { get; set; }
 
         [JsonProperty("SLP")]
-        public long?[] SLP { get; set; }
+        public long?[] Pressure { get; set; }
 
         [JsonProperty("TCDC")]
         public long?[] TCDC { get; set; }

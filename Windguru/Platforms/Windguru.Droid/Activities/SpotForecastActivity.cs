@@ -49,12 +49,13 @@ namespace Windguru.Droid.Activities
                 {
                     report.Add(new HourlyForecast
                     {
-                        Precipitation = data.APCP[i],
-                        Temperature = data.Temperature[i],
+                        Precipitation = $"{data.APCP[i]}",
+                        Temperature = $"{data.Temperature[i]} C",
                         Day = $"{((DayOfWeek)data.DayWeekly[i])} {data.DayHourly[i]}",
-                        Hour = data.HourHourly[i],
+                        Hour = $"{data.HourHourly[i]}h",
+                        WindSpeed = $"{data.WINDSPD[i]}",
+                        WindGusts = data.GUST[i],
                         WindDirection = data.WINDDIR[i],
-                        WindSpeed = data.WINDSPD[i]
                     });
                 }
 
