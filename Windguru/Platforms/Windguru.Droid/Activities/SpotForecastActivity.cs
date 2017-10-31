@@ -12,14 +12,15 @@ using Android.Widget;
 using Microsoft.Practices.ServiceLocation;
 using Windguru.Core.Services;
 using Windguru.Core.Models.Common;
+using Android.Support.V7.App;
 using Android.Support.V7.Widget;
 using Windguru.Droid.Adapters;
 using System.Globalization;
 
 namespace Windguru.Droid.Activities
 {
-    [Activity(Label = "Forecast")]
-    public class SpotForecastActivity : Activity
+    [Activity(Label = "Forecast", Theme = "@style/MainTheme")]
+    public class SpotForecastActivity : AppCompatActivity
     {
         public RecyclerView HourlyForecastRecyclerView { get; private set; }
 

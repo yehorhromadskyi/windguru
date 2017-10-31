@@ -18,12 +18,13 @@ using System.Reactive.Concurrency;
 using System.Threading;
 using System.Threading.Tasks;
 using Windguru.Droid.Common;
+using Android.Support.V7.App;
 using Windguru.Core.Models.Api;
 
 namespace Windguru.Droid.Activities
 {
-    [Activity(Label = "SearchActivity", MainLauncher = true)]
-    public class SearchActivity : Activity
+    [Activity(Label = "SearchActivity", MainLauncher = true, Theme = "@style/MainTheme")]
+    public class SearchActivity : AppCompatActivity
     {
         readonly CompositeDisposable _compositeDisposable = new CompositeDisposable();
 
