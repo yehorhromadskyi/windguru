@@ -2227,11 +2227,11 @@ namespace Windguru.Droid
 			// aapt resource value: 0x7f060018
 			public const int useLogo = 2131099672;
 			
-			// aapt resource value: 0x7f06006a
-			public const int windDirectionImageView = 2131099754;
-			
 			// aapt resource value: 0x7f060069
-			public const int windSpeedTextView = 2131099753;
+			public const int windDirectionImageView = 2131099753;
+			
+			// aapt resource value: 0x7f06006a
+			public const int windSpeedTextView = 2131099754;
 			
 			// aapt resource value: 0x7f06002e
 			public const int withText = 2131099694;

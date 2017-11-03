@@ -54,7 +54,7 @@ namespace Windguru.Droid.Activities
                         Temperature = $"{data.Temperature[i]} C",
                         Day = $"{((DayOfWeek)data.DayWeekly[i])} {data.DayHourly[i]}",
                         Hour = $"{data.HourHourly[i]}h",
-                        WindSpeed = $"{data.WINDSPD[i]}",
+                        WindSpeed = $"{data.WINDSPD[i]} kn",
                         WindGusts = data.GUST[i],
                         WindDirection = data.WINDDIR[i],
                     });
