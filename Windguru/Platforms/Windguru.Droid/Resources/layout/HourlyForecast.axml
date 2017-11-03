@@ -34,7 +34,8 @@
     android:layout_gravity="center" />
 
   <ImageView
-    android:layout_width="45dp"
-    android:layout_height="45dp"
-    app:srcCompat="@drawable/compass" />
+    android:id="@+id/windDirectionImageView"
+    android:layout_width="24dp"
+    android:layout_height="24dp"
+    app:srcCompat="@drawable/arrow" />
 </LinearLayout>

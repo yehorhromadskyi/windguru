@@ -19,6 +19,7 @@ namespace Windguru.Droid.ViewHolders
         public TextView HourTextView { get; private set; }
         public TextView TemperatureTextView { get; private set; }
         public TextView WindSpeedTextView { get; private set; }
+        public ImageView WindDirectionImageView { get; private set; }
 
         public HourlyForecastViewHolder(View itemView) : base(itemView)
         {
@@ -26,6 +27,7 @@ namespace Windguru.Droid.ViewHolders
             DayTextView = itemView.FindViewById<TextView>(Resource.Id.dayTextView);
             TemperatureTextView = itemView.FindViewById<TextView>(Resource.Id.temperatureTextView);
             WindSpeedTextView = itemView.FindViewById<TextView>(Resource.Id.windSpeedTextView);
+            WindDirectionImageView = itemView.FindViewById<ImageView>(Resource.Id.windDirectionImageView);
         }
     }
 }

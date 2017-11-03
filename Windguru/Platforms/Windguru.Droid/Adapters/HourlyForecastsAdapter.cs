@@ -31,10 +31,15 @@ namespace Windguru.Droid.Adapters
         public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
         {
             var viewHolder = holder as HourlyForecastViewHolder;
-            viewHolder.DayTextView.Text = _hourlyForecasts[position].Day;
-            viewHolder.HourTextView.Text = _hourlyForecasts[position].Hour;
-            viewHolder.TemperatureTextView.Text = _hourlyForecasts[position].Temperature;
-            viewHolder.WindSpeedTextView.Text = _hourlyForecasts[position].WindSpeed;
+            var hourlyData = _hourlyForecasts[position];
+
+            viewHolder.DayTextView.Text = hourlyData.Day;
+            viewHolder.HourTextView.Text = hourlyData.Hour;
+            viewHolder.TemperatureTextView.Text = hourlyData.Temperature;
+            viewHolder.WindSpeedTextView.Text = hourlyData.WindSpeed;
+
+            var windDirection = hourlyData.WindDirection ?? 0;
+            viewHolder.WindDirectionImageView.Rotation = (float)windDirection;
         }
 
         public override int ItemCount => _hourlyForecasts.Count;
