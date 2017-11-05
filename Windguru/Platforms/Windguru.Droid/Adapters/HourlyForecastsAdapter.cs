@@ -37,6 +37,7 @@ namespace Windguru.Droid.Adapters
             viewHolder.HourTextView.Text = hourlyData.Hour;
             viewHolder.TemperatureTextView.Text = hourlyData.Temperature;
             viewHolder.WindSpeedTextView.Text = hourlyData.WindSpeed;
+            viewHolder.PrecipitationTextView.Text = hourlyData.Precipitation;
 
             var windDirection = hourlyData.WindDirection ?? 0;
             viewHolder.WindDirectionImageView.Rotation = (float)windDirection;

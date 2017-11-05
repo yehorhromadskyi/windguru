@@ -21,18 +21,50 @@
     android:layout_height="wrap_content"
     android:gravity="center" />
 
-  <TextView
-    android:id="@+id/temperatureTextView"
-    android:layout_width="match_parent"
+  <LinearLayout
+    android:orientation="horizontal"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginLeft="8dp"
-    android:layout_marginTop="12dp" />
+    android:layout_marginTop="12dp">
+    <ImageView
+      android:layout_width="16dp"
+      android:layout_height="16dp"
+      android:layout_gravity="center"
+      app:srcCompat="@drawable/thermometer" />
+
+    <TextView
+      android:id="@+id/temperatureTextView"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginLeft="4dp" />
+  </LinearLayout>
 
   <LinearLayout
     android:orientation="horizontal"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="8dp">
+    android:layout_marginLeft="8dp"
+    android:layout_marginTop="12dp">
+    <ImageView
+      android:layout_width="16dp"
+      android:layout_height="16dp"
+      android:layout_gravity="center"
+      app:srcCompat="@drawable/drop" />
+
+    <TextView
+      android:id="@+id/precipitationTextView"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginLeft="4dp" />
+  </LinearLayout>
+
+  <LinearLayout
+    android:orientation="horizontal"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="8dp"
+    android:layout_marginTop="12dp">
     <ImageView
       android:id="@+id/windDirectionImageView"
       android:layout_width="16dp"
