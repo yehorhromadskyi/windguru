@@ -9,11 +9,11 @@ using Windguru.Droid.ViewHolders;
 
 namespace Windguru.Droid.Adapters
 {
-    public class HourlyForecastsAdapter : RecyclerView.Adapter
+    public class HourlyForecastAdapter : RecyclerView.Adapter
     {
         readonly List<HourlyForecast> _hourlyForecasts;
 
-        public HourlyForecastsAdapter(List<HourlyForecast> hourlyForecasts)
+        public HourlyForecastAdapter(List<HourlyForecast> hourlyForecasts)
         {
             _hourlyForecasts = hourlyForecasts;
         }

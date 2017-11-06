@@ -116,12 +116,14 @@
   <ItemGroup>
     <Compile Include="Activities\SearchActivity.cs" />
     <Compile Include="Activities\SpotForecastActivity.cs" />
-    <Compile Include="Adapters\HourlyForecastsAdapter.cs" />
+    <Compile Include="Adapters\DailyForecastAdapter.cs" />
+    <Compile Include="Adapters\HourlyForecastAdapter.cs" />
     <Compile Include="Adapters\SpotsAdapter.cs" />
     <Compile Include="App.cs" />
     <Compile Include="Common\ScrollListener.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewHolders\DailyForecastViewHolder.cs" />
     <Compile Include="ViewHolders\HourlyForecastViewHolder.cs" />
   </ItemGroup>
   <ItemGroup>

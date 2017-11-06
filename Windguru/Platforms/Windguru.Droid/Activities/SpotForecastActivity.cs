@@ -62,7 +62,7 @@ namespace Windguru.Droid.Activities
                     });
                 }
 
-                HourlyForecastRecyclerView.SetAdapter(new HourlyForecastsAdapter(report));
+                HourlyForecastRecyclerView.SetAdapter(new HourlyForecastAdapter(report));
                 HourlyForecastRecyclerView.SetLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.Horizontal, false));
             }
         }
