@@ -23,6 +23,7 @@ namespace Windguru.Droid.Activities
     public class SpotForecastActivity : AppCompatActivity
     {
         public RecyclerView HourlyForecastRecyclerView { get; private set; }
+        public RecyclerView DailyForecastRecyclerView { get; private set; }
 
         protected override async void OnCreate(Bundle savedInstanceState)
         {
@@ -30,7 +31,8 @@ namespace Windguru.Droid.Activities
 
             SetContentView(Resource.Layout.SpotForecastView);
 
-            HourlyForecastRecyclerView = FindViewById<RecyclerView>(Resource.Id.forecastRecyclerView);
+            DailyForecastRecyclerView = FindViewById<RecyclerView>(Resource.Id.dailyForecastRecyclerView);
+            HourlyForecastRecyclerView = FindViewById<RecyclerView>(Resource.Id.hourlyForecastRecyclerView);
 
             var apiProvider = ServiceLocator.Current.GetInstance<IApiProvider>();
 
@@ -61,6 +63,9 @@ namespace Windguru.Droid.Activities
                         WindDirection = data.WINDDIR[i],
                     });
                 }
+
+                DailyForecastRecyclerView.SetAdapter(new DailyForecastAdapter(new List<DailyForecast> { new DailyForecast { Day = "Sunday"}, new DailyForecast { Day = "Friday" } }));
+                DailyForecastRecyclerView.SetLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.Horizontal, false));
 
                 HourlyForecastRecyclerView.SetAdapter(new HourlyForecastAdapter(report));
                 HourlyForecastRecyclerView.SetLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.Horizontal, false));

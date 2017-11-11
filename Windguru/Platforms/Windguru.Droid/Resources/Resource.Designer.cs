@@ -1873,8 +1873,8 @@ namespace Windguru.Droid
 			// aapt resource value: 0x7f060029
 			public const int SYM = 2131099689;
 			
-			// aapt resource value: 0x7f06006f
-			public const int action0 = 2131099759;
+			// aapt resource value: 0x7f060070
+			public const int action0 = 2131099760;
 			
 			// aapt resource value: 0x7f060057
 			public const int action_bar = 2131099735;
@@ -1897,17 +1897,17 @@ namespace Windguru.Droid
 			// aapt resource value: 0x7f060035
 			public const int action_bar_title = 2131099701;
 			
-			// aapt resource value: 0x7f06006c
-			public const int action_container = 2131099756;
+			// aapt resource value: 0x7f06006d
+			public const int action_container = 2131099757;
 			
 			// aapt resource value: 0x7f060058
 			public const int action_context_bar = 2131099736;
 			
-			// aapt resource value: 0x7f060073
-			public const int action_divider = 2131099763;
+			// aapt resource value: 0x7f060074
+			public const int action_divider = 2131099764;
 			
-			// aapt resource value: 0x7f06006d
-			public const int action_image = 2131099757;
+			// aapt resource value: 0x7f06006e
+			public const int action_image = 2131099758;
 			
 			// aapt resource value: 0x7f060003
 			public const int action_menu_divider = 2131099651;
@@ -1924,11 +1924,11 @@ namespace Windguru.Droid
 			// aapt resource value: 0x7f060037
 			public const int action_mode_close_button = 2131099703;
 			
-			// aapt resource value: 0x7f06006e
-			public const int action_text = 2131099758;
+			// aapt resource value: 0x7f06006f
+			public const int action_text = 2131099759;
 			
-			// aapt resource value: 0x7f06007c
-			public const int actions = 2131099772;
+			// aapt resource value: 0x7f06007d
+			public const int actions = 2131099773;
 			
 			// aapt resource value: 0x7f060038
 			public const int activity_chooser_view_content = 2131099704;
@@ -1957,14 +1957,14 @@ namespace Windguru.Droid
 			// aapt resource value: 0x7f06003e
 			public const int buttonPanel = 2131099710;
 			
-			// aapt resource value: 0x7f060070
-			public const int cancel_action = 2131099760;
+			// aapt resource value: 0x7f060071
+			public const int cancel_action = 2131099761;
 			
 			// aapt resource value: 0x7f06004e
 			public const int checkbox = 2131099726;
 			
-			// aapt resource value: 0x7f060078
-			public const int chronometer = 2131099768;
+			// aapt resource value: 0x7f060079
+			public const int chronometer = 2131099769;
 			
 			// aapt resource value: 0x7f06002b
 			public const int collapseActionView = 2131099691;
@@ -1978,8 +1978,14 @@ namespace Windguru.Droid
 			// aapt resource value: 0x7f060047
 			public const int customPanel = 2131099719;
 			
+			// aapt resource value: 0x7f060082
+			public const int dailyForecastRecyclerView = 2131099778;
+			
 			// aapt resource value: 0x7f060066
-			public const int dayTextView = 2131099750;
+			public const int dayDailyTextView = 2131099750;
+			
+			// aapt resource value: 0x7f060067
+			public const int dayTextView = 2131099751;
 			
 			// aapt resource value: 0x7f060055
 			public const int decor_content_parent = 2131099733;
@@ -1996,17 +2002,14 @@ namespace Windguru.Droid
 			// aapt resource value: 0x7f060022
 			public const int end = 2131099682;
 			
-			// aapt resource value: 0x7f06007e
-			public const int end_padder = 2131099774;
+			// aapt resource value: 0x7f06007f
+			public const int end_padder = 2131099775;
 			
 			// aapt resource value: 0x7f060039
 			public const int expand_activities_button = 2131099705;
 			
 			// aapt resource value: 0x7f06004d
 			public const int expanded_menu = 2131099725;
-			
-			// aapt resource value: 0x7f060081
-			public const int forecastRecyclerView = 2131099777;
 			
 			// aapt resource value: 0x7f060033
 			public const int forever = 2131099699;
@@ -2017,14 +2020,17 @@ namespace Windguru.Droid
 			// aapt resource value: 0x7f060013
 			public const int homeAsUp = 2131099667;
 			
-			// aapt resource value: 0x7f060067
-			public const int hourTextView = 2131099751;
+			// aapt resource value: 0x7f060068
+			public const int hourTextView = 2131099752;
+			
+			// aapt resource value: 0x7f060083
+			public const int hourlyForecastRecyclerView = 2131099779;
 			
 			// aapt resource value: 0x7f06003d
 			public const int icon = 2131099709;
 			
-			// aapt resource value: 0x7f06007d
-			public const int icon_group = 2131099773;
+			// aapt resource value: 0x7f06007e
+			public const int icon_group = 2131099774;
 			
 			// aapt resource value: 0x7f06002c
 			public const int ifRoom = 2131099692;
@@ -2032,8 +2038,8 @@ namespace Windguru.Droid
 			// aapt resource value: 0x7f06003a
 			public const int image = 2131099706;
 			
-			// aapt resource value: 0x7f060079
-			public const int info = 2131099769;
+			// aapt resource value: 0x7f06007a
+			public const int info = 2131099770;
 			
 			// aapt resource value: 0x7f060034
 			public const int italic = 2131099700;
@@ -2053,11 +2059,11 @@ namespace Windguru.Droid
 			// aapt resource value: 0x7f06003c
 			public const int list_item = 2131099708;
 			
-			// aapt resource value: 0x7f060072
-			public const int media_actions = 2131099762;
+			// aapt resource value: 0x7f060073
+			public const int media_actions = 2131099763;
 			
-			// aapt resource value: 0x7f060082
-			public const int message = 2131099778;
+			// aapt resource value: 0x7f060084
+			public const int message = 2131099780;
 			
 			// aapt resource value: 0x7f060023
 			public const int middle = 2131099683;
@@ -2074,20 +2080,20 @@ namespace Windguru.Droid
 			// aapt resource value: 0x7f060010
 			public const int normal = 2131099664;
 			
-			// aapt resource value: 0x7f06007b
-			public const int notification_background = 2131099771;
+			// aapt resource value: 0x7f06007c
+			public const int notification_background = 2131099772;
+			
+			// aapt resource value: 0x7f060076
+			public const int notification_main_column = 2131099766;
 			
 			// aapt resource value: 0x7f060075
-			public const int notification_main_column = 2131099765;
-			
-			// aapt resource value: 0x7f060074
-			public const int notification_main_column_container = 2131099764;
+			public const int notification_main_column_container = 2131099765;
 			
 			// aapt resource value: 0x7f060040
 			public const int parentPanel = 2131099712;
 			
-			// aapt resource value: 0x7f060069
-			public const int precipitationTextView = 2131099753;
+			// aapt resource value: 0x7f06006a
+			public const int precipitationTextView = 2131099754;
 			
 			// aapt resource value: 0x7f060006
 			public const int progress_circular = 2131099654;
@@ -2098,11 +2104,11 @@ namespace Windguru.Droid
 			// aapt resource value: 0x7f060050
 			public const int radio = 2131099728;
 			
-			// aapt resource value: 0x7f06007a
-			public const int right_icon = 2131099770;
+			// aapt resource value: 0x7f06007b
+			public const int right_icon = 2131099771;
 			
-			// aapt resource value: 0x7f060076
-			public const int right_side = 2131099766;
+			// aapt resource value: 0x7f060077
+			public const int right_side = 2131099767;
 			
 			// aapt resource value: 0x7f06001a
 			public const int screen = 2131099674;
@@ -2116,11 +2122,11 @@ namespace Windguru.Droid
 			// aapt resource value: 0x7f060043
 			public const int scrollView = 2131099715;
 			
-			// aapt resource value: 0x7f06007f
-			public const int searchEditText = 2131099775;
-			
 			// aapt resource value: 0x7f060080
-			public const int searchResultsListView = 2131099776;
+			public const int searchEditText = 2131099776;
+			
+			// aapt resource value: 0x7f060081
+			public const int searchResultsListView = 2131099777;
 			
 			// aapt resource value: 0x7f06005b
 			public const int search_badge = 2131099739;
@@ -2182,8 +2188,8 @@ namespace Windguru.Droid
 			// aapt resource value: 0x7f06001d
 			public const int src_over = 2131099677;
 			
-			// aapt resource value: 0x7f060071
-			public const int status_bar_latest_event_content = 2131099761;
+			// aapt resource value: 0x7f060072
+			public const int status_bar_latest_event_content = 2131099762;
 			
 			// aapt resource value: 0x7f060051
 			public const int submenuarrow = 2131099729;
@@ -2194,8 +2200,8 @@ namespace Windguru.Droid
 			// aapt resource value: 0x7f060011
 			public const int tabMode = 2131099665;
 			
-			// aapt resource value: 0x7f060068
-			public const int temperatureTextView = 2131099752;
+			// aapt resource value: 0x7f060069
+			public const int temperatureTextView = 2131099753;
 			
 			// aapt resource value: 0x7f06000c
 			public const int text = 2131099660;
@@ -2209,8 +2215,8 @@ namespace Windguru.Droid
 			// aapt resource value: 0x7f060044
 			public const int textSpacerNoTitle = 2131099716;
 			
-			// aapt resource value: 0x7f060077
-			public const int time = 2131099767;
+			// aapt resource value: 0x7f060078
+			public const int time = 2131099768;
 			
 			// aapt resource value: 0x7f06000e
 			public const int title = 2131099662;
@@ -2236,11 +2242,11 @@ namespace Windguru.Droid
 			// aapt resource value: 0x7f060018
 			public const int useLogo = 2131099672;
 			
-			// aapt resource value: 0x7f06006a
-			public const int windDirectionImageView = 2131099754;
-			
 			// aapt resource value: 0x7f06006b
-			public const int windSpeedTextView = 2131099755;
+			public const int windDirectionImageView = 2131099755;
+			
+			// aapt resource value: 0x7f06006c
+			public const int windSpeedTextView = 2131099756;
 			
 			// aapt resource value: 0x7f06002e
 			public const int withText = 2131099694;
@@ -2371,73 +2377,76 @@ namespace Windguru.Droid
 			public const int abc_select_dialog_material = 2130903066;
 			
 			// aapt resource value: 0x7f03001b
-			public const int HourlyForecast = 2130903067;
+			public const int DailyForecast = 2130903067;
 			
 			// aapt resource value: 0x7f03001c
-			public const int notification_action = 2130903068;
+			public const int HourlyForecast = 2130903068;
 			
 			// aapt resource value: 0x7f03001d
-			public const int notification_action_tombstone = 2130903069;
+			public const int notification_action = 2130903069;
 			
 			// aapt resource value: 0x7f03001e
-			public const int notification_media_action = 2130903070;
+			public const int notification_action_tombstone = 2130903070;
 			
 			// aapt resource value: 0x7f03001f
-			public const int notification_media_cancel_action = 2130903071;
+			public const int notification_media_action = 2130903071;
 			
 			// aapt resource value: 0x7f030020
-			public const int notification_template_big_media = 2130903072;
+			public const int notification_media_cancel_action = 2130903072;
 			
 			// aapt resource value: 0x7f030021
-			public const int notification_template_big_media_custom = 2130903073;
+			public const int notification_template_big_media = 2130903073;
 			
 			// aapt resource value: 0x7f030022
-			public const int notification_template_big_media_narrow = 2130903074;
+			public const int notification_template_big_media_custom = 2130903074;
 			
 			// aapt resource value: 0x7f030023
-			public const int notification_template_big_media_narrow_custom = 2130903075;
+			public const int notification_template_big_media_narrow = 2130903075;
 			
 			// aapt resource value: 0x7f030024
-			public const int notification_template_custom_big = 2130903076;
+			public const int notification_template_big_media_narrow_custom = 2130903076;
 			
 			// aapt resource value: 0x7f030025
-			public const int notification_template_icon_group = 2130903077;
+			public const int notification_template_custom_big = 2130903077;
 			
 			// aapt resource value: 0x7f030026
-			public const int notification_template_lines_media = 2130903078;
+			public const int notification_template_icon_group = 2130903078;
 			
 			// aapt resource value: 0x7f030027
-			public const int notification_template_media = 2130903079;
+			public const int notification_template_lines_media = 2130903079;
 			
 			// aapt resource value: 0x7f030028
-			public const int notification_template_media_custom = 2130903080;
+			public const int notification_template_media = 2130903080;
 			
 			// aapt resource value: 0x7f030029
-			public const int notification_template_part_chronometer = 2130903081;
+			public const int notification_template_media_custom = 2130903081;
 			
 			// aapt resource value: 0x7f03002a
-			public const int notification_template_part_time = 2130903082;
+			public const int notification_template_part_chronometer = 2130903082;
 			
 			// aapt resource value: 0x7f03002b
-			public const int SearchView = 2130903083;
+			public const int notification_template_part_time = 2130903083;
 			
 			// aapt resource value: 0x7f03002c
-			public const int select_dialog_item_material = 2130903084;
+			public const int SearchView = 2130903084;
 			
 			// aapt resource value: 0x7f03002d
-			public const int select_dialog_multichoice_material = 2130903085;
+			public const int select_dialog_item_material = 2130903085;
 			
 			// aapt resource value: 0x7f03002e
-			public const int select_dialog_singlechoice_material = 2130903086;
+			public const int select_dialog_multichoice_material = 2130903086;
 			
 			// aapt resource value: 0x7f03002f
-			public const int SpotForecastView = 2130903087;
+			public const int select_dialog_singlechoice_material = 2130903087;
 			
 			// aapt resource value: 0x7f030030
-			public const int support_simple_spinner_dropdown_item = 2130903088;
+			public const int SpotForecastView = 2130903088;
 			
 			// aapt resource value: 0x7f030031
-			public const int tooltip = 2130903089;
+			public const int support_simple_spinner_dropdown_item = 2130903089;
+			
+			// aapt resource value: 0x7f030032
+			public const int tooltip = 2130903090;
 			
 			static Layout()
 			{

@@ -1,38 +1,38 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
+﻿using Android.Support.V7.Widget;
 using Android.Views;
-using Android.Widget;
-using Android.Support.V7.Widget;
+using System.Collections.Generic;
 using Windguru.Core.Models.Common;
+using Windguru.Droid.ViewHolders;
 
 namespace Windguru.Droid.Adapters
 {
     public class DailyForecastAdapter : RecyclerView.Adapter
     {
-        private readonly List<DailyForecast> dailyForecast;
+        readonly List<DailyForecast> _dailyForecast;
+
+        public override int ItemCount => _dailyForecast.Count;
 
         public DailyForecastAdapter(List<DailyForecast> dailyForecast)
         {
-            this.dailyForecast = dailyForecast;
+            _dailyForecast = dailyForecast;
         }
+        
+        public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
+        {
+            View itemView = null;
+            var id = Resource.Layout.DailyForecast;
+            itemView = LayoutInflater.From(parent.Context).Inflate(id, parent, false);
 
-        public override int ItemCount => dailyForecast.Count;
+            var vh = new DailyForecastViewHolder(itemView);
+            return vh;
+        }
 
         public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
         {
-            throw new NotImplementedException();
-        }
+            var viewHolder = holder as DailyForecastViewHolder;
+            var dailyData = _dailyForecast[position];
 
-        public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
-        {
-            throw new NotImplementedException();
+            viewHolder.Day.Text = dailyData.Day;
         }
     }
 }

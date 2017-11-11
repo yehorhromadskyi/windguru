@@ -11,11 +11,13 @@ namespace Windguru.Droid.Adapters
 {
     public class HourlyForecastAdapter : RecyclerView.Adapter
     {
-        readonly List<HourlyForecast> _hourlyForecasts;
+        readonly List<HourlyForecast> _hourlyForecast;
+
+        public override int ItemCount => _hourlyForecast.Count;
 
         public HourlyForecastAdapter(List<HourlyForecast> hourlyForecasts)
         {
-            _hourlyForecasts = hourlyForecasts;
+            _hourlyForecast = hourlyForecasts;
         }
 
         public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
@@ -31,7 +33,7 @@ namespace Windguru.Droid.Adapters
         public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
         {
             var viewHolder = holder as HourlyForecastViewHolder;
-            var hourlyData = _hourlyForecasts[position];
+            var hourlyData = _hourlyForecast[position];
 
             viewHolder.DayTextView.Text = hourlyData.Day;
             viewHolder.HourTextView.Text = hourlyData.Hour;
@@ -42,8 +44,5 @@ namespace Windguru.Droid.Adapters
             var windDirection = hourlyData.WindDirection ?? 0;
             viewHolder.WindDirectionImageView.Rotation = (float)windDirection;
         }
-
-        public override int ItemCount => _hourlyForecasts.Count;
-
     }
 }
