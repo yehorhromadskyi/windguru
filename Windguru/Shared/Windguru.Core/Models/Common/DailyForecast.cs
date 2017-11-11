@@ -8,5 +8,10 @@ namespace Windguru.Core.Models.Common
         public string Temperature { get; set; }
 
         public List<HourlyForecast> HourlyForecast { get; set; }
+
+        public DailyForecast()
+        {
+            HourlyForecast = new List<HourlyForecast>();
+        }
     }
 }

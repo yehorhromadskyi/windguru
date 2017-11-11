@@ -44,17 +44,28 @@ namespace Windguru.Droid.Activities
 
                 Title = forecast.Name;
 
-                var report = new List<HourlyForecast>();
+                var dailyForecast = new List<DailyForecast>();
 
                 //if (!DateTime.TryParseExact(data.InitialDate, new string[] { "dd.MM.yyyy", "MM.dd.yyyy" }, CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime initialDate))
                 //{
                 //    initialDate = DateTime.Today;
                 //}
+
                 for (var i = 0; i < data.DayWeekly.Length; i++)
                 {
-                    report.Add(new HourlyForecast
+                    var currentDaily = new DailyForecast { Day = $"{((DayOfWeek)data.DayWeekly[i])} {data.DayHourly[i]}" };
+                    var savedDaily = dailyForecast.FirstOrDefault(d => d.Day == currentDaily.Day);
+                    if (savedDaily == null)
                     {
-                        Day = $"{((DayOfWeek)data.DayWeekly[i])} {data.DayHourly[i]}",
+                        dailyForecast.Add(currentDaily);
+                    }
+                    else
+                    {
+                        currentDaily = savedDaily;
+                    }
+
+                    currentDaily.HourlyForecast.Add(new HourlyForecast
+                    {
                         Hour = $"{data.HourHourly[i]}h",
                         Temperature = $"{(int)data.Temperature[i]}°C",
                         Precipitation = $"{data.APCP[i] ?? 0} mm",
@@ -64,10 +75,16 @@ namespace Windguru.Droid.Activities
                     });
                 }
 
-                DailyForecastRecyclerView.SetAdapter(new DailyForecastAdapter(new List<DailyForecast> { new DailyForecast { Day = "Sunday"}, new DailyForecast { Day = "Friday" } }));
+                if (!dailyForecast.Any())
+                {
+                    return;
+                    // TODO: Show error message
+                }
+
+                DailyForecastRecyclerView.SetAdapter(new DailyForecastAdapter(dailyForecast));
                 DailyForecastRecyclerView.SetLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.Horizontal, false));
 
-                HourlyForecastRecyclerView.SetAdapter(new HourlyForecastAdapter(report));
+                HourlyForecastRecyclerView.SetAdapter(new HourlyForecastAdapter(dailyForecast.First().HourlyForecast));
                 HourlyForecastRecyclerView.SetLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.Horizontal, false));
             }
         }
