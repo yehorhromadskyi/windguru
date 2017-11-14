@@ -11,11 +11,16 @@ namespace Windguru.Droid.Adapters
 {
     public class HourlyForecastAdapter : RecyclerView.Adapter
     {
-        readonly List<HourlyForecast> _hourlyForecast;
+        List<HourlyForecast> _hourlyForecast;
 
         public override int ItemCount => _hourlyForecast.Count;
 
         public HourlyForecastAdapter(List<HourlyForecast> hourlyForecasts)
+        {
+            _hourlyForecast = hourlyForecasts;
+        }
+
+        public void ChangeData(List<HourlyForecast> hourlyForecasts)
         {
             _hourlyForecast = hourlyForecasts;
         }

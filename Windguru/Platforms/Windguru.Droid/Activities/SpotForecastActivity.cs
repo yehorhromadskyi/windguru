@@ -81,11 +81,21 @@ namespace Windguru.Droid.Activities
                     // TODO: Show error message
                 }
 
-                DailyForecastRecyclerView.SetAdapter(new DailyForecastAdapter(dailyForecast));
+                var dailyForecastAdapter = new DailyForecastAdapter(dailyForecast);
+                var hourlyForecastAdapter = new HourlyForecastAdapter(dailyForecast.First().HourlyForecast);
+                
+                DailyForecastRecyclerView.SetAdapter(dailyForecastAdapter);
                 DailyForecastRecyclerView.SetLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.Horizontal, false));
 
-                HourlyForecastRecyclerView.SetAdapter(new HourlyForecastAdapter(dailyForecast.First().HourlyForecast));
+                HourlyForecastRecyclerView.SetAdapter(hourlyForecastAdapter);
                 HourlyForecastRecyclerView.SetLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.Horizontal, false));
+
+                // TODO: dispose
+                dailyForecastAdapter.ItemClicked.Subscribe(daily =>
+                {
+                    hourlyForecastAdapter.ChangeData(daily.HourlyForecast);
+                    hourlyForecastAdapter.NotifyDataSetChanged();
+                });
             }
         }
     }
