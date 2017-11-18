@@ -16,12 +16,15 @@ using Android.Support.V7.App;
 using Android.Support.V7.Widget;
 using Windguru.Droid.Adapters;
 using System.Globalization;
+using System.Reactive.Disposables;
 
 namespace Windguru.Droid.Activities
 {
     [Activity(Label = "Forecast", Theme = "@style/MainTheme")]
     public class SpotForecastActivity : AppCompatActivity
     {
+        readonly CompositeDisposable _compositeDisposable = new CompositeDisposable();
+
         public RecyclerView HourlyForecastRecyclerView { get; private set; }
         public RecyclerView DailyForecastRecyclerView { get; private set; }
 
@@ -53,7 +56,11 @@ namespace Windguru.Droid.Activities
 
                 for (var i = 0; i < data.DayWeekly.Length; i++)
                 {
-                    var currentDaily = new DailyForecast { Day = $"{((DayOfWeek)data.DayWeekly[i])} {data.DayHourly[i]}" };
+                    var currentDaily = new DailyForecast
+                    {
+                        Day = $"{((DayOfWeek)data.DayWeekly[i]).ToString().Substring(0, 3)} {data.DayHourly[i]}"
+                    };
+
                     var savedDaily = dailyForecast.FirstOrDefault(d => d.Day == currentDaily.Day);
                     if (savedDaily == null)
                     {
@@ -66,10 +73,10 @@ namespace Windguru.Droid.Activities
 
                     currentDaily.HourlyForecast.Add(new HourlyForecast
                     {
-                        Hour = $"{data.HourHourly[i]}h",
-                        Temperature = $"{(int)data.Temperature[i]}°C",
-                        Precipitation = $"{data.APCP[i] ?? 0} mm",
-                        WindSpeed = $"{data.WINDSPD[i]} kn",
+                        Hour = string.Format("{0}h", data.HourHourly[i]),
+                        Temperature = string.Format("{0}°C", (int)data.Temperature[i]),
+                        Precipitation = string.Format("{0} mm", data.APCP[i] ?? 0),
+                        WindSpeed = string.Format("{0} kn", data.WINDSPD[i]),
                         WindGusts = data.GUST[i],
                         WindDirection = data.WINDDIR[i],
                     });
@@ -83,20 +90,29 @@ namespace Windguru.Droid.Activities
 
                 var dailyForecastAdapter = new DailyForecastAdapter(dailyForecast);
                 var hourlyForecastAdapter = new HourlyForecastAdapter(dailyForecast.First().HourlyForecast);
-                
+
                 DailyForecastRecyclerView.SetAdapter(dailyForecastAdapter);
                 DailyForecastRecyclerView.SetLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.Horizontal, false));
 
                 HourlyForecastRecyclerView.SetAdapter(hourlyForecastAdapter);
                 HourlyForecastRecyclerView.SetLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.Horizontal, false));
 
-                // TODO: dispose
-                dailyForecastAdapter.ItemClicked.Subscribe(daily =>
-                {
-                    hourlyForecastAdapter.ChangeData(daily.HourlyForecast);
-                    hourlyForecastAdapter.NotifyDataSetChanged();
-                });
+                var dailyForecastClicked = dailyForecastAdapter.ItemClicked
+                                                               .Subscribe(daily =>
+                                                               {
+                                                                   hourlyForecastAdapter.ChangeData(daily.HourlyForecast);
+                                                                   hourlyForecastAdapter.NotifyDataSetChanged();
+                                                               });
+
+                _compositeDisposable.Add(dailyForecastAdapter);
             }
+        }
+
+        protected override void OnDestroy()
+        {
+            base.OnDestroy();
+
+            _compositeDisposable.Clear();
         }
     }
 }

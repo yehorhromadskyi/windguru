@@ -40,7 +40,6 @@ namespace Windguru.Droid.Adapters
             var viewHolder = holder as HourlyForecastViewHolder;
             var hourlyData = _hourlyForecast[position];
 
-            viewHolder.DayTextView.Text = hourlyData.Day;
             viewHolder.HourTextView.Text = hourlyData.Hour;
             viewHolder.TemperatureTextView.Text = hourlyData.Temperature;
             viewHolder.WindSpeedTextView.Text = hourlyData.WindSpeed;
