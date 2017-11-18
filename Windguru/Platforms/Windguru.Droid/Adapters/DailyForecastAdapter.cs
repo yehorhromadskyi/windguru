@@ -15,6 +15,8 @@ namespace Windguru.Droid.Adapters
 
         readonly List<DailyForecast> _dailyForecast;
 
+        int _selectedPosition;
+
         public IObservable<DailyForecast> ItemClicked => _itemClicked.AsObservable();
 
         public override int ItemCount => _dailyForecast.Count;
@@ -30,7 +32,18 @@ namespace Windguru.Droid.Adapters
             var id = Resource.Layout.DailyForecast;
             itemView = LayoutInflater.From(parent.Context).Inflate(id, parent, false);
 
-            var vh = new DailyForecastViewHolder(itemView, position => _itemClicked.OnNext(_dailyForecast[position]));
+            var vh = new DailyForecastViewHolder(itemView, 
+                clicked: position =>
+                {
+                    var oldSelectedPosition = _selectedPosition;
+                    _selectedPosition = position;
+                
+                    NotifyItemChanged(oldSelectedPosition);
+                    NotifyItemChanged(position);
+                
+                    _itemClicked.OnNext(_dailyForecast[position]);
+                });
+
             return vh;
         }
 
@@ -38,6 +51,15 @@ namespace Windguru.Droid.Adapters
         {
             var viewHolder = holder as DailyForecastViewHolder;
             var dailyData = _dailyForecast[position];
+
+            if (_selectedPosition == position)
+            {
+                viewHolder.ItemView.SetBackgroundColor(Android.Graphics.Color.Red);
+            }
+            else
+            {
+                viewHolder.ItemView.SetBackgroundColor(Android.Graphics.Color.Black);
+            }
 
             viewHolder.Day.Text = dailyData.Day;
         }
