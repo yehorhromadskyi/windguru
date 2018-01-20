@@ -11,10 +11,7 @@ using Android.Views;
 using Android.Widget;
 using Microsoft.Practices.ServiceLocation;
 using Windguru.Core.Services;
-using System.Reactive.Linq;
 using Android.Text;
-using System.Reactive.Disposables;
-using System.Reactive.Concurrency;
 using System.Threading;
 using System.Threading.Tasks;
 using Windguru.Droid.Common;
@@ -26,15 +23,15 @@ namespace Windguru.Droid.Activities
     [Activity(Label = "SearchActivity", MainLauncher = true, Theme = "@style/MainTheme")]
     public class SearchActivity : AppCompatActivity
     {
-        readonly CompositeDisposable _compositeDisposable = new CompositeDisposable();
-
         IApiProvider _apiProvider;
 
         ArrayAdapter<SpotInfo> _spotsAdapter;
+        ScrollListener _scrollListener;
 
         int _page = 1;
 
         public EditText SearchEditText { get; set; }
+        public Button SearchButton { get; set; }
         public ListView ResultsListView { get; set; }
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -46,74 +43,62 @@ namespace Windguru.Droid.Activities
             _apiProvider = ServiceLocator.Current.GetInstance<IApiProvider>();
 
             SearchEditText = FindViewById<EditText>(Resource.Id.searchEditText);
+            SearchButton = FindViewById<Button>(Resource.Id.searchButton_SearchView);
             ResultsListView = FindViewById<ListView>(Resource.Id.searchResultsListView);
 
             _spotsAdapter = new ArrayAdapter<SpotInfo>(this, Android.Resource.Layout.SimpleListItem1);
-            var scrollListener = new ScrollListener();
+            _scrollListener = new ScrollListener();
+
+            SearchButton.Click += OnSearchClicked;
+            _scrollListener.ScrolledToBottom += OnScrolledToBottom;
+            ResultsListView.ItemClick += OnSpotClicked;
+
             ResultsListView.Adapter = _spotsAdapter;
-            ResultsListView.SetOnScrollListener(scrollListener);
-
-            var loadMore = Observable.FromEventPattern(
-                                         h => scrollListener.ScrolledToBottom += h,
-                                         h => scrollListener.ScrolledToBottom -= h)
-                                     .SelectMany(_ =>
-                                     {
-                                         return _apiProvider.GetSpotsAsync(SearchEditText.Text, ++_page);
-                                     })
-                                     .ObserveOn(SynchronizationContext.Current)
-                                     .Subscribe(results =>
-                                     {
-                                         _spotsAdapter.AddAll(results.ToList());
-
-                                         _spotsAdapter.NotifyDataSetChanged();
-                                     });
-
-            var textChanged = SearchEditText.Events()
-                                            .TextChanged
-                                            .Where(args => args.Text.ToString().Length > 1)
-                                            .Throttle(TimeSpan.FromSeconds(.5))
-                                            .DistinctUntilChanged()
-                                            .SelectMany(args =>
-                                            {
-                                                _page = 1;
-                                                return _apiProvider.GetSpotsAsync(args.Text.ToString());
-                                            })
-                                            .ObserveOn(SynchronizationContext.Current)
-                                            .Subscribe(results =>
-                                            {
-                                                if (!_spotsAdapter.IsEmpty)
-                                                {
-                                                    _spotsAdapter.Clear();
-                                                }
-
-                                                _spotsAdapter.AddAll(results.ToList());
-                                                
-                                                _spotsAdapter.NotifyDataSetChanged();
-                                            });
-
-            var itemClick = ResultsListView.Events()
-                                           .ItemClick
-                                           .Subscribe(args =>
-                                           {
-                                               var spot = _spotsAdapter.GetItem(args.Position);
-                                               var intent = new Intent(this, typeof(SpotForecastActivity));
-                                               intent.PutExtra("spotId", spot.Id);
-
-                                               StartActivity(intent);
-                                           });
-
-            _compositeDisposable.Add(loadMore);
-            _compositeDisposable.Add(textChanged);
-            _compositeDisposable.Add(itemClick);
+            ResultsListView.SetOnScrollListener(_scrollListener);
 
             SearchEditText.Text = "Maui";
+        }
+
+        private void OnSpotClicked(object sender, AdapterView.ItemClickEventArgs e)
+        {
+            var spot = _spotsAdapter.GetItem(e.Position);
+            var intent = new Intent(this, typeof(SpotForecastActivity));
+            intent.PutExtra("spotId", spot.Id);
+
+            StartActivity(intent);
+        }
+
+        private async void OnSearchClicked(object sender, EventArgs e)
+        {
+            _page = 1;
+            var spots = await _apiProvider.GetSpotsAsync(SearchEditText.Text);
+
+            if (!_spotsAdapter.IsEmpty)
+            {
+                _spotsAdapter.Clear();
+            }
+
+            _spotsAdapter.AddAll(spots.ToList());
+
+            _spotsAdapter.NotifyDataSetChanged();
+        }
+
+        private async void OnScrolledToBottom(object sender, EventArgs e)
+        {
+            var spots = await _apiProvider.GetSpotsAsync(SearchEditText.Text, ++_page);
+
+            _spotsAdapter.AddAll(spots.ToList());
+
+            _spotsAdapter.NotifyDataSetChanged();
         }
 
         protected override void OnDestroy()
         {
             base.OnDestroy();
 
-            _compositeDisposable.Clear();
+            SearchButton.Click -= OnSearchClicked;
+            ResultsListView.ItemClick -= OnSpotClicked;
+            _scrollListener.ScrolledToBottom -= OnScrolledToBottom;
         }
     }
 }

@@ -16,14 +16,14 @@ using Android.Support.V7.App;
 using Android.Support.V7.Widget;
 using Windguru.Droid.Adapters;
 using System.Globalization;
-using System.Reactive.Disposables;
 
 namespace Windguru.Droid.Activities
 {
     [Activity(Label = "Forecast", Theme = "@style/MainTheme")]
     public class SpotForecastActivity : AppCompatActivity
     {
-        readonly CompositeDisposable _compositeDisposable = new CompositeDisposable();
+        DailyForecastAdapter _dailyForecastAdapter;
+        HourlyForecastAdapter _hourlyForecastAdapter;
 
         public RecyclerView HourlyForecastRecyclerView { get; private set; }
         public RecyclerView DailyForecastRecyclerView { get; private set; }
@@ -88,31 +88,30 @@ namespace Windguru.Droid.Activities
                     // TODO: Show error message
                 }
 
-                var dailyForecastAdapter = new DailyForecastAdapter(dailyForecast);
-                var hourlyForecastAdapter = new HourlyForecastAdapter(dailyForecast.First().HourlyForecast);
+                _dailyForecastAdapter = new DailyForecastAdapter(dailyForecast);
+                _hourlyForecastAdapter = new HourlyForecastAdapter(dailyForecast.First().HourlyForecast);
 
-                DailyForecastRecyclerView.SetAdapter(dailyForecastAdapter);
+                DailyForecastRecyclerView.SetAdapter(_dailyForecastAdapter);
                 DailyForecastRecyclerView.SetLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.Horizontal, false));
 
-                HourlyForecastRecyclerView.SetAdapter(hourlyForecastAdapter);
+                HourlyForecastRecyclerView.SetAdapter(_hourlyForecastAdapter);
                 HourlyForecastRecyclerView.SetLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.Horizontal, false));
 
-                var dailyForecastClicked = dailyForecastAdapter.ItemClicked
-                                                               .Subscribe(daily =>
-                                                               {
-                                                                   hourlyForecastAdapter.ChangeData(daily.HourlyForecast);
-                                                                   hourlyForecastAdapter.NotifyDataSetChanged();
-                                                               });
-
-                _compositeDisposable.Add(dailyForecastAdapter);
+                _dailyForecastAdapter.ItemClicked += OnDailyForecastItemClicked;
             }
+        }
+
+        private void OnDailyForecastItemClicked(object sender, DailyForecast daily)
+        {
+            _hourlyForecastAdapter.ChangeData(daily.HourlyForecast);
+            _hourlyForecastAdapter.NotifyDataSetChanged();
         }
 
         protected override void OnDestroy()
         {
             base.OnDestroy();
 
-            _compositeDisposable.Clear();
+            _dailyForecastAdapter.ItemClicked -= OnDailyForecastItemClicked;
         }
     }
 }

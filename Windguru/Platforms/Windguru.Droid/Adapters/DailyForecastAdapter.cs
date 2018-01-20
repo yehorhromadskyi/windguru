@@ -2,8 +2,6 @@
 using Android.Views;
 using System;
 using System.Collections.Generic;
-using System.Reactive.Linq;
-using System.Reactive.Subjects;
 using Windguru.Core.Models.Common;
 using Windguru.Droid.ViewHolders;
 
@@ -11,13 +9,10 @@ namespace Windguru.Droid.Adapters
 {
     public class DailyForecastAdapter : RecyclerView.Adapter
     {
-        readonly Subject<DailyForecast> _itemClicked = new Subject<DailyForecast>();
-
+        int _selectedPosition;
         readonly List<DailyForecast> _dailyForecast;
 
-        int _selectedPosition;
-
-        public IObservable<DailyForecast> ItemClicked => _itemClicked.AsObservable();
+        public event EventHandler<DailyForecast> ItemClicked;
 
         public override int ItemCount => _dailyForecast.Count;
 
@@ -41,7 +36,7 @@ namespace Windguru.Droid.Adapters
                     NotifyItemChanged(oldSelectedPosition);
                     NotifyItemChanged(position);
                 
-                    _itemClicked.OnNext(_dailyForecast[position]);
+                    ItemClicked?.Invoke(this, _dailyForecast[position]);
                 });
 
             return vh;
