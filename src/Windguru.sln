@@ -1,13 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.10
+VisualStudioVersion = 15.0.27130.2026
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Platforms", "Platforms", "{E371D62B-556C-446C-93DB-128E9CA68069}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Windguru.Droid", "Platforms\Windguru.Droid\Windguru.Droid.csproj", "{E47F0E60-C8EE-416F-87B3-E61D84536ADB}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{00CCB79A-3CE6-4CD1-B548-0CE56E50DC29}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Windguru.Core", "Shared\Windguru.Core\Windguru.Core.csproj", "{677601A9-E284-4FDA-9D44-3B15445974CC}"
 EndProject
@@ -30,10 +26,6 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{E47F0E60-C8EE-416F-87B3-E61D84536ADB} = {E371D62B-556C-446C-93DB-128E9CA68069}
-		{677601A9-E284-4FDA-9D44-3B15445974CC} = {00CCB79A-3CE6-4CD1-B548-0CE56E50DC29}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {16903763-3C83-4383-928A-1BE50D99739E}
